@@ -15,4 +15,13 @@ class GameController extends Controller
     {
         return GameService::simple_game();
     }
+
+    function mutiple_turn()
+    {
+        return GameService::more_turn_game();
+    }
+
+    function game_with_player(string $player) {
+        
+    }
 }
