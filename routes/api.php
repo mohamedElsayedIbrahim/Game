@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware(['cors','json'])->group(function () {
+    Route::prefix('game')->group(function(){
+        Route::get('players',[GameController::class,'players']);
+        Route::get('simple/turn',[GameController::class,'game_turn']);
+    });
 });
