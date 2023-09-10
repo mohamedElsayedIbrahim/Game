@@ -25,5 +25,6 @@ Route::middleware(['cors','json'])->group(function () {
         Route::get('simple/turn',[GameController::class,'game_turn']);
         Route::get('mutiple/turn',[GameController::class,'mutiple_turn']);
         Route::get('simple/player',[GameController::class,'start_with_player']);
+        Route::get('simple/player/turns',[GameController::class,'start_with_player_with_turns']);
     });
 });

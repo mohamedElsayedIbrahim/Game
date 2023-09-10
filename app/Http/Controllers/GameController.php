@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\GameService;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class GameController extends Controller
 {
@@ -21,7 +22,16 @@ class GameController extends Controller
         return GameService::more_turn_game();
     }
 
-    function game_with_player(string $player) {
+    function start_with_player() {
+        $player = request()->get('player');
+        return GameService::simple_game_with_player($player);
+    }
+
+    function start_with_player_with_turns(){
+        $player = request()->get('player');
+        $turn = request()->get('turns');
+        $players_numbers = request()->get('player_num') ?? 3;
         
+        return GameService::simple_game_with_player_turns($player,(int)$turn,(int)$players_numbers);
     }
 }
