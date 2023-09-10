@@ -29,9 +29,9 @@ class GameController extends Controller
 
     function start_with_player_with_turns(){
         $player = request()->get('player');
-        $turn = request()->get('turns');
+        $turns = request()->get('turns') ?? 3;
         $players_numbers = request()->get('player_num') ?? 3;
-        
-        return GameService::simple_game_with_player_turns($player,(int)$turn,(int)$players_numbers);
+
+        return GameService::simple_game_with_player_turns($player,(int)$turns,(int)$players_numbers);
     }
 }

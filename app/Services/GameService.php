@@ -30,7 +30,7 @@ class GameService {
 
     public static function simple_game_with_player_turns(string $player , int $turns ,int $player_number = 3)
     {
-        dd(self::turns($player,$player_number,$turns));
+        return self::turns($player,$player_number,$turns);
     }
 
     private static function get_element_index(string $element)
@@ -57,15 +57,27 @@ class GameService {
     private static function turns(string $player, int $player_number, int $turn = 3)
     {
         $response = [];
-        $player = self::init_players($player,$player_number);
+        
+        $players = self::init_players($player,$player_number);
+
+        $customize = -1; //this variable for adjusment
+
         for ($i=0; $i < $turn; $i++) {       
+            
             $temp = [];
             $target = [];
-            for ($j=0; $j < $player_number; $j++) { 
-                if ($j < $i) {
-                    array_push($temp,$player[$j]);
+
+            $customize++;
+
+            if ($i%$player_number == 0) {
+                $customize = 0;
+            }
+
+            for ($j=0; $j < count($players); $j++) { 
+                if ($j < $customize) {
+                    array_push($temp,$players[$j]);
                 } else{
-                    array_push($target,$player[$j]);
+                    array_push($target,$players[$j]);
                 }
             }
             array_push($response,array_merge($target,$temp)); 
