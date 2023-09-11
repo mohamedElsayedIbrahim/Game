@@ -28,3 +28,5 @@ Route::middleware(['cors','json'])->group(function () {
         Route::get('simple/player/turns',[GameController::class,'start_with_player_with_turns']);
     });
 });
+
+Route::any('{url}', function(){return response()->json(['type'=>'error','message'=>'This URL is not found'],404);})->where('url', '.*');
